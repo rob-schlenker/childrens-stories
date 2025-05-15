@@ -5,33 +5,43 @@ import { useEffect, useState } from "react";
 
 export default function FavoritesPage() {
   const [favorites, setFavorites] = useState<string[]>([]);
+  const [pendingUnfavorites, setPendingUnfavorites] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const favs = JSON.parse(localStorage.getItem("favorites") || "[]");
     setFavorites(favs);
+    setPendingUnfavorites([]); // Clear pending unfavorites on mount
+    setLoading(false); // Set loading to false after loading favorites
   }, []);
 
   const handleFavorite = (id: string) => {
-    let updated: string[];
     if (favorites.includes(id)) {
-      updated = favorites.filter((fid) => fid !== id);
+      // Unfavorite: add to pendingUnfavorites, update localStorage, but keep in UI
+      setPendingUnfavorites((prev) => [...prev, id]);
+      const updated = favorites.filter((fid) => fid !== id);
+      setFavorites(updated);
+      localStorage.setItem("favorites", JSON.stringify(updated));
     } else {
-      updated = [...favorites, id];
+      // Favorite: remove from pendingUnfavorites if present, add to favorites
+      setPendingUnfavorites((prev) => prev.filter((fid) => fid !== id));
+      const updated = [...favorites, id];
+      setFavorites(updated);
+      localStorage.setItem("favorites", JSON.stringify(updated));
     }
-    setFavorites(updated);
-    localStorage.setItem("favorites", JSON.stringify(updated));
   };
 
-  const favoriteStories = stories.filter((story) =>
-    favorites.includes(story.id)
+  // Show all stories that are in favorites or pendingUnfavorites
+  const favoriteStories = stories.filter(
+    (story) => favorites.includes(story.id) || pendingUnfavorites.includes(story.id)
   );
 
-  if (favoriteStories.length === 0) {
+  if (!loading && favoriteStories.length === 0) {
     return <p>You have no favorite stories yet.</p>;
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
       {favoriteStories.map((story) => (
         <StoryCard
           key={story.id}
