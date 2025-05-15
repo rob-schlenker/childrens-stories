@@ -21,6 +21,7 @@ export default function ThemeToggle() {
 
   return (
     <Button
+        className="cursor-pointer flex-1 justify-end" 
       variant="ghost"
       size="icon"
       aria-label="Toggle theme"
