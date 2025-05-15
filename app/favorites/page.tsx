@@ -1,9 +1,9 @@
 "use client";
 import { stories } from "@/lib/stories";
-import StoryCard from "./_components/StoryCard";
+import StoryCard from "../_components/StoryCard";
 import { useEffect, useState } from "react";
 
-export default function HomePage() {
+export default function FavoritesPage() {
   const [favorites, setFavorites] = useState<string[]>([]);
 
   useEffect(() => {
@@ -22,9 +22,17 @@ export default function HomePage() {
     localStorage.setItem("favorites", JSON.stringify(updated));
   };
 
+  const favoriteStories = stories.filter((story) =>
+    favorites.includes(story.id)
+  );
+
+  if (favoriteStories.length === 0) {
+    return <p>You have no favorite stories yet.</p>;
+  }
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
-      {stories.map((story) => (
+      {favoriteStories.map((story) => (
         <StoryCard
           key={story.id}
           story={story}
