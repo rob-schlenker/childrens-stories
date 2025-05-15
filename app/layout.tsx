@@ -13,7 +13,7 @@ import Image from "next/image";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Children's Stories",
+  title: "Starlit Library",
   description: "Read and favorite free children's stories.",
 };
 
