@@ -37,17 +37,19 @@ export default function StoryCard({ story, onFavorite, isFavorited }: Props) {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 flex flex-col justify-between">
       {story.image && !imgError ? (
-        <img
-          src={story.image}
-          alt={story.title}
-          className="w-full h-40 object-cover rounded"
-          onError={() => {
-            setImgError(true);
-            if (process.env.NODE_ENV !== 'production') {
-              console.warn('Image failed to load for story:', story.title, story.image);
-            }
-          }}
-        />
+        <div className="w-full h-40 overflow-hidden rounded">
+          <img
+            src={story.image}
+            alt={story.title}
+            className="w-full h-40 object-cover rounded transition-transform duration-300 ease-in-out hover:scale-105"
+            onError={() => {
+              setImgError(true);
+              if (process.env.NODE_ENV !== 'production') {
+                console.warn('Image failed to load for story:', story.title, story.image);
+              }
+            }}
+          />
+        </div>
       ) : (
         <div
           className={`w-full h-40 rounded flex flex-col items-center justify-center text-center text-white font-bold text-lg bg-gradient-to-br ${gradient}`}

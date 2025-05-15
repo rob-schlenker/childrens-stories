@@ -37,7 +37,7 @@ export default function HomePage() {
         </h3>
         <div className="mt-2 sm:mt-0 flex gap-2">
           <button
-            className={`px-4 py-2 rounded ${
+            className={`px-4 py-2 rounded cursor-pointer ${
               view === "gallery"
                 ? "bg-blue-500 text-white"
                 : "bg-gray-200 dark:bg-gray-700"
@@ -48,7 +48,7 @@ export default function HomePage() {
             Gallery
           </button>
           <button
-            className={`px-4 py-2 rounded ${
+            className={`px-4 py-2 rounded cursor-pointer ${
               view === "list"
                 ? "bg-blue-500 text-white"
                 : "bg-gray-200 dark:bg-gray-700"
