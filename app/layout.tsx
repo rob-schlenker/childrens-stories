@@ -20,8 +20,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-900"> 
-            <h1 className="text-2xl font-bold flex-1">Dreamland Library</h1>
+          <div className="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-900 fixed w-full"> 
+            <h1 className="text-2xl font-bold flex-1">Starlit Library</h1>
             <nav className="flex gap-4">
               <a href="/" className="hover:underline">Home</a>
               <a href="/favorites" className="hover:underline">Favorites</a>

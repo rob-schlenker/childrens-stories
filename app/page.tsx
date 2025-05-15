@@ -23,15 +23,22 @@ export default function HomePage() {
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
-      {stories.map((story) => (
-        <StoryCard
-          key={story.id}
-          story={story}
-          isFavorited={favorites.includes(story.id)}
-          onFavorite={handleFavorite}
-        />
-      ))}
+    <div>
+      <div className="flex items-center justify-between p-4 flex-col">
+        <h1 className="text-2xl font-bold mb-4">Welcome to Starlit Library</h1>
+        <h3>Discover magical stories under a sky full of stars.
+            Pick a tale, and let your imagination soar!</h3>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
+        {stories.map((story) => (
+          <StoryCard
+            key={story.id}
+            story={story}
+            isFavorited={favorites.includes(story.id)}
+            onFavorite={handleFavorite}
+          />
+        ))}
+      </div>
     </div>
   );
 }
