@@ -38,9 +38,9 @@ export default function HeroBanner() {
 					<Image
 						src="/starlit-logo-large.png"
 						alt="Starlit Library Logo"
-						width={380}
-						height={380}
-						className="w-[220px] h-[220px] md:w-[380px] md:h-[380px] object-contain"
+						width={433}
+						height={537}
+						className="w-[220px] md:w-[433px] object-contain h-fit"
 						priority
 					/>
 				</motion.div>
