@@ -17,7 +17,7 @@ type Props = {
 const SiteCard = ({ site, isFavorited, onFavorite }: Props) => {
 	return (
 		<motion.div
-			className="relative group"
+			className="relative group h-full"
 			whileHover={{ y: -5 }}
 			transition={{ type: "spring", stiffness: 300 }}
 		>

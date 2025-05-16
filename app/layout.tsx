@@ -4,8 +4,8 @@ import ThemeToggle from "./_components/ThemeToggle";
 import { ThemeProvider } from "next-themes";
 import { ReactNode } from "react";
 import TwinklingStarBackground from "./_components/TwinklingStarBackground";
-import { stories } from "@/lib/stories";
 import NavSearchBar, { HamburgerNav } from "./_components/NavSearchBar";
+import Footer from "./_components/Footer";
 import { Search } from "lucide-react";
 import Image from "next/image";
 
@@ -23,8 +23,9 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<body className={inter.className}>
+			<body className={`${inter.className} flex flex-col min-h-screen`}>
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+					{/* Header */}
 					<div className="fixed w-full z-20 bg-gray-100 dark:bg-gray-900 p-4">
 						<div className="relative flex items-center justify-between max-w-5xl mx-auto">
 							{/* Left: Logo */}
@@ -69,9 +70,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
 					</div>
 
 					<div className="h-[68px]" aria-hidden="true" />
-					<main className="max-w-3xl mx-auto p-4 relative z-10">
+
+					{/* Main Content */}
+					<main className="flex-grow max-w-6xl w-full mx-auto p-4 relative z-10">
 						{children}
 					</main>
+
+					{/* Footer */}
+					<Footer />
 				</ThemeProvider>
 			</body>
 		</html>
