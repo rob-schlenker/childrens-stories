@@ -3,6 +3,8 @@ import { stories } from "@/lib/stories";
 import StoryCard from "./_components/StoryCard";
 import { useEffect, useState } from "react";
 import HeroBanner from "./_components/HeroBanner";
+import StorySitesSection from "./_components/StorySitesSection";
+
 
 export default function HomePage() {
   const [favorites, setFavorites] = useState<string[]>([]);
@@ -27,6 +29,7 @@ export default function HomePage() {
   return (
     <div>
       <HeroBanner />
+      <StorySitesSection/>
       <div
         className="flex items-center justify-between p-4 flex-col sm:flex-row"
         id="stories"

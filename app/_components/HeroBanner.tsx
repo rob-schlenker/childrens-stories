@@ -4,18 +4,18 @@ import Image from "next/image";
 
 export default function HeroBanner() {
   return (
-    <section className="relative w-full overflow-hidden min-h-[420px] flex items-center justify-center bg-gradient-to-br from-[#232946] via-[#3e4a89] to-[#6c63ff]">
+    <section className="relative w-full overflow-hidden min-h-[420px] flex items-center justify-center">
       {/* Decorative Stars */}
       <StarDecor />
 
       <div className="relative z-10 flex flex-col-reverse md:flex-row items-center justify-between w-full max-w-6xl px-8 py-16">
         {/* Left: Text */}
         <div className="flex-1 text-left">
-          <h1 className="text-white font-extrabold text-4xl md:text-5xl mb-6 leading-tight font-[Quicksand,sans-serif]">
+          <h1 className="font-extrabold text-4xl md:text-5xl mb-6 leading-tight font-[Quicksand,sans-serif]">
             Welcome to <br />
             <span className="text-[#ffd700]">Starlit Library</span>
           </h1>
-          <p className="text-white text-lg md:text-2xl mb-8 max-w-xl font-[Inter,sans-serif]">
+          <p className="text-lg md:text-2xl mb-8 max-w-xl font-[Inter,sans-serif]">
             Discover magical stories under a sky full of stars.<br />
             Pick a tale, and let your imagination soar!
           </p>
