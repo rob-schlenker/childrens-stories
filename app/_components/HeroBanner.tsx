@@ -19,12 +19,6 @@ export default function HeroBanner() {
             Discover magical stories under a sky full of stars.<br />
             Pick a tale, and let your imagination soar!
           </p>
-          <a
-            href="#stories"
-            className="inline-block px-8 py-3 rounded-full bg-[#ffd700] text-[#232946] font-bold text-lg shadow-lg hover:bg-[#ffe066] transition"
-          >
-            Start Reading
-          </a>
         </div>
         {/* Right: Logo */}
         <motion.div

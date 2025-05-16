@@ -5,7 +5,7 @@ import { ThemeProvider } from "next-themes";
 import { ReactNode } from "react";
 import TwinklingStarBackground from "./_components/TwinklingStarBackground";
 import { stories } from "@/lib/stories";
-import NavSearchBar from "./_components/NavSearchBar";
+import NavSearchBar, { HamburgerNav } from "./_components/NavSearchBar";
 import { Search } from "lucide-react";
 import Image from "next/image";
 
@@ -25,8 +25,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
 		<html lang="en" suppressHydrationWarning>
 			<body className={inter.className}>
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-					{/* Twinkling star background */}
-					{/* <TwinklingStarBackground /> */}
 					<div className="fixed w-full z-20 bg-gray-100 dark:bg-gray-900 p-4">
 						<div className="relative flex items-center justify-between max-w-5xl mx-auto">
 							{/* Left: Logo */}
@@ -46,19 +44,25 @@ export default function RootLayout({ children }: RootLayoutProps) {
 								</span>
 							</div>
 
-							{/* Center: Nav */}
-							<nav className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-6 items-center">
-								<a href="/" className="hover:underline">
+							{/* Center: Nav (hidden on mobile) */}
+							<nav className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 gap-6 items-center hidden sm:flex">
+								{/* <a href="/" className="hover:underline">
 									Home
 								</a>
 								<a href="/favorites" className="hover:underline">
 									Favorites
-								</a>
+								</a> */}
 								<NavSearchBar />
 							</nav>
 
+							{/* Hamburger menu for mobile */}
+							<div className="sm:hidden flex items-center">
+								<HamburgerNav />
+								<ThemeToggle />
+							</div>
+
 							{/* Right: Theme Toggle */}
-							<div className="flex items-center min-w-[40px] justify-end">
+							<div className="items-center min-w-[40px] justify-end  hidden sm:flex">
 								<ThemeToggle />
 							</div>
 						</div>
