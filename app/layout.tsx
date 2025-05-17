@@ -28,10 +28,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
 					{/* Header */}
 					<div className="fixed w-full z-20 bg-gray-100 dark:bg-gray-900 p-4">
-						<div className="relative flex items-center justify-between max-w-5xl mx-auto">
+						<div className="relative mx-auto max-w-5xl flex items-center justify-between">
 							{/* Left: Logo */}
-							<div className="flex items-center min-w-[120px]">
-								<a href="/" aria-label="Home">
+							<div className="flex items-center flex-shrink-0">
+								<a href="/" className="flex items-center" aria-label="Home">
 									<Image
 										src="/starlit-library-logo-removebg-preview.png"
 										alt="Starlit Library Logo"
@@ -40,34 +40,29 @@ export default function RootLayout({ children }: RootLayoutProps) {
 										className="object-contain"
 										priority
 									/>
+									<span
+										className={`ml-3 text-2xl text-[#232946] dark:text-white hidden sm:inline ${greatVibes.className}`}
+									>
+										Starlit Library
+									</span>
 								</a>
-								<span
-									className={`ml-3 text-2xl text-[#232946] dark:text-white hidden sm:inline ${greatVibes.className}`}
-								>
-									Starlit Library
-								</span>
 							</div>
 
-							{/* Center: Nav (hidden on mobile) */}
-							<nav className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 gap-6 items-center hidden sm:flex">
-								{/* <a href="/" className="hover:underline">
-									Home
-								</a>
-								<a href="/favorites" className="hover:underline">
-									Favorites
-								</a> */}
-								<NavSearchBar />
-							</nav>
-
-							{/* Hamburger menu for mobile */}
-							<div className="sm:hidden flex items-center">
-								<HamburgerNav />
-								<ThemeToggle />
+							{/* Center: Search */}
+							<div className="flex-1 flex justify-center px-4 max-w-xl">
+								<nav className="hidden sm:block w-full">
+									<NavSearchBar />
+								</nav>
 							</div>
 
-							{/* Right: Theme Toggle */}
-							<div className="items-center min-w-[40px] justify-end  hidden sm:flex">
-								<ThemeToggle />
+							{/* Right: Mobile menu and theme toggle */}
+							<div className="flex items-center gap-4 flex-shrink-0">
+								<div className="sm:hidden">
+									<HamburgerNav />
+								</div>
+								<div className="hidden sm:block">
+									<ThemeToggle />
+								</div>
 							</div>
 						</div>
 					</div>

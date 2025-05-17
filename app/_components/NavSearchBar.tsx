@@ -1,17 +1,25 @@
 "use client";
+
 import { useState, useRef, useEffect } from "react";
 import { storySites } from "./StorySitesSection";
 import { Search } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 export default function NavSearchBar({
 	hideLinksOnExpand = false,
 }: { hideLinksOnExpand?: boolean } = {}) {
+	const [mounted, setMounted] = useState(false);
 	const [search, setSearch] = useState("");
 	const [showDropdown, setShowDropdown] = useState(false);
 	const [expanded, setExpanded] = useState(false);
 	const inputRef = useRef<HTMLInputElement>(null);
 	const dropdownRef = useRef<HTMLDivElement>(null);
 	const searchButtonRef = useRef<HTMLButtonElement>(null);
+
+	// Mount effect to handle hydration
+	useEffect(() => {
+		setMounted(true);
+	}, []);
 
 	// Filter sites by name or description
 	const filteredSites = search.trim()
@@ -49,90 +57,100 @@ export default function NavSearchBar({
 
 	// Auto-focus input when expanded
 	useEffect(() => {
-		if (expanded && inputRef.current) {
+		if (expanded && inputRef.current && mounted) {
 			inputRef.current.focus();
 		}
-	}, [expanded]);
+	}, [expanded, mounted]);
+
+	// Return null or a loading state before mounting
+	if (!mounted) {
+		return (
+			<div className="relative flex items-center justify-center gap-2">
+				<div className="hidden sm:flex items-center gap-6">
+					<span className="font-medium">Loading...</span>
+				</div>
+				<button
+					type="button"
+					aria-label="Loading search"
+					className="p-2 rounded-full"
+					disabled
+				>
+					<Search className="w-5 h-5" />
+				</button>
+			</div>
+		);
+	}
 
 	return (
-		<div className="relative flex items-center">
+		<div className="relative flex items-center justify-center gap-2">
 			{/* Hide nav items when search is expanded (desktop only) */}
 			{!expanded && !hideLinksOnExpand && (
-				<>
-					<a
-						href="/"
-						className="ml-4 hover:underline font-medium hidden sm:inline"
-					>
+				<div className="hidden sm:flex items-center gap-6">
+					<a href="/" className="font-medium hover:underline">
 						Home
 					</a>
-					<a
-						href="/favorites"
-						className="ml-4 hover:underline font-medium hidden sm:inline"
-					>
+					<a href="/favorites" className="font-medium hover:underline">
 						Favorites
 					</a>
-				</>
+				</div>
 			)}
-			<button
-				ref={searchButtonRef}
-				type="button"
-				aria-label="Open search"
-				className={`p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition ${
-					expanded ? "bg-gray-200 dark:bg-gray-700" : ""
-				}`}
-				onClick={() => setExpanded((prev) => !prev)}
-			>
-				<Search className="w-5 h-5" />
-			</button>
-			<form
-				className={`relative transition-all duration-200 overflow-visible ${
-					expanded ? "w-[150px] sm:w-56 opacity-100 ml-4" : "w-0 opacity-0"
-				} flex-shrink-0`}
-				onSubmit={(e) => e.preventDefault()}
-				autoComplete="off"
-			>
-				<input
-					ref={inputRef}
-					type="text"
-					value={search}
-					onChange={(e) => {
-						setSearch(e.target.value);
-						setShowDropdown(true);
-					}}
-					placeholder="Search sites..."
-					className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
-				/>
+			<div className="flex items-center">
+				{expanded ? (
+					<div
+						className="flex items-center"
+						style={{ width: expanded ? "300px" : "auto" }}
+					>
+						<input
+							ref={inputRef}
+							type="text"
+							placeholder="Search story sites..."
+							className="w-full p-2 rounded-lg bg-background border text-foreground"
+							value={search}
+							onChange={(e) => {
+								setSearch(e.target.value);
+								setShowDropdown(true);
+							}}
+						/>
+					</div>
+				) : (
+					<button
+						ref={searchButtonRef}
+						type="button"
+						onClick={() => setExpanded(true)}
+						className="p-2 rounded-full hover:bg-accent"
+						aria-label="Search"
+					>
+						<Search className="w-5 h-5" />
+					</button>
+				)}
+
+				{/* Search Results Dropdown */}
 				{showDropdown && search.trim() && (
 					<div
 						ref={dropdownRef}
-						className="absolute left-0 right-0 mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded shadow-lg max-h-60 overflow-y-auto z-30 w-[150px] sm:w-auto"
+						className="absolute top-full mt-2 w-[300px] max-h-[400px] overflow-y-auto bg-background border rounded-lg shadow-lg z-50"
 					>
-						{filteredSites.length === 0 ? (
-							<div className="p-4 text-gray-500 text-center">No results</div>
-						) : (
+						{filteredSites.length > 0 ? (
 							filteredSites.map((site) => (
 								<a
-									key={site.id}
+									key={site.name}
 									href={site.url}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="block px-4 py-2 hover:bg-blue-100 dark:hover:bg-blue-900 cursor-pointer"
-									onClick={() => {
-										setShowDropdown(false);
-										setExpanded(false);
-										setSearch("");
-									}}
+									className="block p-3 hover:bg-accent border-b last:border-b-0"
 								>
-									<span className="font-semibold">{site.name}</span>
-									<span className="ml-2 text-sm text-gray-500 dark:text-gray-400">
+									<div className="font-medium">{site.name}</div>
+									<div className="text-sm text-muted-foreground">
 										{site.description}
-									</span>
+									</div>
 								</a>
 							))
+						) : (
+							<div className="p-3 text-center text-muted-foreground">
+								No results found
+							</div>
 						)}
 					</div>
 				)}
-			</form>
+			</div>
 		</div>
 	);
 }
@@ -166,7 +184,7 @@ export function HamburgerNav() {
 			)}
 			{/* Slide-in menu */}
 			<nav
-				className={`fixed top-0 right-0 h-full w-64 bg-white dark:bg-gray-900 shadow-lg z-50 transform transition-transform duration-300 ${
+				className={`fixed top-0 right-0 h-full w-80 bg-white dark:bg-gray-900 shadow-lg z-50 transform transition-transform duration-300 ${
 					open ? "translate-x-0" : "translate-x-full"
 				} sm:hidden`}
 				aria-label="Mobile menu"
@@ -187,22 +205,35 @@ export function HamburgerNav() {
 						<path d="M6 18L18 6M6 6l12 12" />
 					</svg>
 				</button>
-				<div className="flex flex-col items-start mt-16 gap-6 px-6">
+				<div className="flex flex-col mt-16 px-6">
+					{/* Search Section */}
+					<div className="mb-6">
+						<NavSearchBar hideLinksOnExpand />
+					</div>
+					<div className="h-px bg-gray-200 dark:bg-gray-700 w-full mb-6" />
+					{/* Navigation Links */}
 					<a
 						href="/"
-						className="text-lg font-bold hover:underline"
+						className="text-lg font-bold hover:underline py-2"
 						onClick={() => setOpen(false)}
 					>
 						Home
 					</a>
 					<a
 						href="/favorites"
-						className="text-lg font-bold hover:underline"
+						className="text-lg font-bold hover:underline py-2"
 						onClick={() => setOpen(false)}
 					>
 						Favorites
 					</a>
-					<NavSearchBar />
+					<div className="h-px bg-gray-200 dark:bg-gray-700 w-full my-6" />
+					{/* Theme Toggle Section */}
+					<div className="flex items-center gap-3 py-2">
+						<span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+							Theme
+						</span>
+						<ThemeToggle />
+					</div>
 				</div>
 			</nav>
 		</>
