@@ -4,6 +4,7 @@ import HeroBanner from "./_components/HeroBanner";
 import { storySites } from "./_components/StorySitesSection";
 import SiteCard from "./_components/SiteCard";
 import { BookOpen, Sparkles, Globe, Headphones } from "lucide-react";
+import Image from "next/image";
 
 export default function HomePage() {
 	const [favorites, setFavorites] = useState<string[]>([]);
@@ -61,25 +62,37 @@ export default function HomePage() {
 			{/* Featured Site */}
 			{featured && (
 				<section className="max-w-4xl mx-auto px-4">
-					<div className="flex flex-col md:flex-row items-center bg-gradient-to-br from-[#ffd700]/30 via-[#b8c1ec]/30 to-[#6c63ff]/20 rounded-3xl shadow-lg p-8 md:p-12 border-2 border-[#ffd700] relative overflow-hidden">
-						<div className="absolute top-0 right-0 p-3 bg-[#ffd700] rounded-bl-2xl text-sm font-bold text-[#232946]">
+					<div className="flex flex-col md:flex-row items-center bg-gradient-to-br from-[#ffd700]/30 via-[#b8c1ec]/30 to-[#6c63ff]/20 rounded-3xl shadow-lg p-8 pt-16 md:p-12 border-2 border-[#ffd700] relative overflow-hidden">
+						<div className="absolute top-0 right-0 p-2 md:p-3 bg-[#ffd700] rounded-bl-2xl text-sm font-bold text-[#232946]">
 							Featured Pick ✨
 						</div>
-						<div>
-							<h2 className="text-2xl md:text-3xl font-bold mb-4 text-[#232946] dark:text-white">
-								{featured.name}
-							</h2>
-							<p className="text-md md:text-lg mb-6 text-gray-800 dark:text-gray-200">
-								{featured.description}
-							</p>
-							<a
-								href={featured.url}
-								target="_blank"
-								rel="noopener noreferrer"
-								className="inline-block px-6 py-2.5 rounded-xl bg-[#232946] text-[#ffd700] font-bold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200"
-							>
-								Explore Now
-							</a>
+						<div className="flex flex-col md:flex-row items-center gap-8 w-full">
+							<div className="w-32 h-32 md:w-40 md:h-40 flex-shrink-0 bg-white/80 rounded-2xl p-4">
+								<Image
+									src="/logos/sooper-books-logo.png"
+									alt="Sooper Books Logo"
+									width={160}
+									height={160}
+									className="w-full h-full object-contain"
+									priority
+								/>
+							</div>
+							<div>
+								<h2 className="text-2xl md:text-3xl font-bold mb-4 text-[#232946] dark:text-white text-center md:text-left">
+									{featured.name}
+								</h2>
+								<p className="text-md md:text-lg mb-6 text-gray-800 dark:text-gray-200">
+									{featured.description}
+								</p>
+								<a
+									href={featured.url}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="inline-block px-6 py-2.5 rounded-xl bg-[#232946] text-[#ffd700] font-bold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200"
+								>
+									Explore Now
+								</a>
+							</div>
 						</div>
 					</div>
 				</section>

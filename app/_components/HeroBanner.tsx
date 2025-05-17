@@ -1,6 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { Great_Vibes } from "next/font/google";
+
+const greatVibes = Great_Vibes({ subsets: ["latin"], weight: "400" });
 
 export default function HeroBanner() {
 	return (
@@ -16,9 +19,13 @@ export default function HeroBanner() {
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.6 }}
 					>
-						<h1 className="font-extrabold text-4xl md:text-5xl mb-6 leading-tight">
-							Welcome to <br />
-							<span className="text-[#ffd700]">Starlit Library</span>
+						<h1 className="font-extrabold text-3xl md:text-4xl mb-6 leading-tight">
+							<span className="block mb-2">Welcome to</span>
+							<span
+								className={`${greatVibes.className} text-[#ffd700] text-5xl md:text-7xl block leading-relaxed`}
+							>
+								Starlit Library
+							</span>
 						</h1>
 						<p className="text-lg md:text-2xl mb-8 text-gray-600 dark:text-gray-300">
 							Discover magical stories under a sky full of stars.
@@ -32,17 +39,31 @@ export default function HeroBanner() {
 				<motion.div
 					className="flex-1 flex justify-center items-center mb-8 md:mb-0"
 					initial={{ opacity: 0, y: 40 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.8, ease: "easeOut" }}
+					animate={{
+						opacity: 1,
+						y: 0,
+						transition: { duration: 0.8, ease: "easeOut" },
+					}}
 				>
-					<Image
-						src="/starlit-logo-large.png"
-						alt="Starlit Library Logo"
-						width={433}
-						height={537}
-						className="w-[220px] md:w-[433px] object-contain h-fit"
-						priority
-					/>
+					<motion.div
+						animate={{
+							y: [0, -10, 0],
+						}}
+						transition={{
+							duration: 4,
+							repeat: Infinity,
+							ease: "easeInOut",
+						}}
+					>
+						<Image
+							src="/starlit-logo-large.png"
+							alt="Starlit Library Logo"
+							width={433}
+							height={537}
+							className="w-[220px] md:w-[433px] object-contain h-fit"
+							priority
+						/>
+					</motion.div>
 				</motion.div>
 			</div>
 		</div>

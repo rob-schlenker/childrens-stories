@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Inter, Great_Vibes } from "next/font/google";
 import ThemeToggle from "./_components/ThemeToggle";
 import { ThemeProvider } from "next-themes";
 import { ReactNode } from "react";
@@ -10,6 +10,7 @@ import { Search } from "lucide-react";
 import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
+const greatVibes = Great_Vibes({ subsets: ["latin"], weight: "400" });
 
 export const metadata = {
 	title: "Starlit Library",
@@ -40,7 +41,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
 										priority
 									/>
 								</a>
-								<span className="ml-3 text-xl font-bold text-[#232946] dark:text-white hidden sm:inline">
+								<span
+									className={`ml-3 text-2xl text-[#232946] dark:text-white hidden sm:inline ${greatVibes.className}`}
+								>
 									Starlit Library
 								</span>
 							</div>
