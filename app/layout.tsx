@@ -6,6 +6,7 @@ import { ReactNode } from "react";
 import NavSearchBar, { HamburgerNav } from "./_components/NavSearchBar";
 import Footer from "./_components/Footer";
 import Image from "next/image";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 const greatVibes = Great_Vibes({ subsets: ["latin"], weight: "400" });
@@ -29,7 +30,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 						<div className="relative mx-auto max-w-5xl flex items-center justify-between">
 							{/* Left: Logo */}
 							<div className="flex items-center flex-shrink-0">
-								<a href="/" className="flex items-center" aria-label="Home">
+								<Link href="/" className="flex items-center" aria-label="Home">
 									<Image
 										src="/starlit-library-logo-removebg-preview.png"
 										alt="Starlit Library Logo"
@@ -43,7 +44,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 									>
 										Starlit Library
 									</span>
-								</a>
+								</Link>
 							</div>
 
 							{/* Center: Search */}
