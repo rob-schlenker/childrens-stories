@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { storySites } from "./StorySitesSection";
 import { Search } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
+import Link from "next/link";
 
 export default function NavSearchBar({
 	hideLinksOnExpand = false,
@@ -86,12 +87,12 @@ export default function NavSearchBar({
 			{/* Hide nav items when search is expanded (desktop only) */}
 			{!expanded && !hideLinksOnExpand && (
 				<div className="hidden sm:flex items-center gap-6">
-					<a href="/" className="font-medium hover:underline">
+					<Link href="/" className="font-medium hover:underline">
 						Home
-					</a>
-					<a href="/favorites" className="font-medium hover:underline">
+					</Link>
+					<Link href="/favorites" className="font-medium hover:underline">
 						Favorites
-					</a>
+					</Link>
 				</div>
 			)}
 			<div className="flex items-center">
@@ -212,20 +213,20 @@ export function HamburgerNav() {
 					</div>
 					<div className="h-px bg-gray-200 dark:bg-gray-700 w-full mb-6" />
 					{/* Navigation Links */}
-					<a
+					<Link
 						href="/"
 						className="text-lg font-bold hover:underline py-2"
 						onClick={() => setOpen(false)}
 					>
 						Home
-					</a>
-					<a
+					</Link>
+					<Link
 						href="/favorites"
 						className="text-lg font-bold hover:underline py-2"
 						onClick={() => setOpen(false)}
 					>
 						Favorites
-					</a>
+					</Link>
 					<div className="h-px bg-gray-200 dark:bg-gray-700 w-full my-6" />
 					{/* Theme Toggle Section */}
 					<div className="flex items-center gap-3 py-2">

@@ -4,6 +4,7 @@ import { storySites } from "../_components/StorySitesSection";
 import SiteCard from "../_components/SiteCard";
 import { BookHeart, Star, Library } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function FavoritesPage() {
 	const [favorites, setFavorites] = useState<string[]>([]);
@@ -68,13 +69,13 @@ export default function FavoritesPage() {
 					libraries! Each star you click adds a new treasure to your reading
 					journey.
 				</p>
-				<a
+				<Link
 					href="/"
 					className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#ffd700] to-[#ffaa33] text-[#232946] font-bold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200"
 				>
 					<Library className="w-5 h-5" />
 					Discover Story Libraries
-				</a>
+				</Link>
 			</motion.div>
 		);
 	}
@@ -98,8 +99,9 @@ export default function FavoritesPage() {
 					Your Magical Collection
 				</h1>
 				<p className="text-lg text-gray-600 dark:text-gray-300">
-					Here are the story libraries you've marked as favorites. Your personal
-					constellation of {favoriteSites.length} magical reading destinations!
+					Here are the story libraries you&apos;ve marked as favorites. Your
+					personal constellation of {favoriteSites.length} magical reading
+					destinations!
 				</p>
 			</div>
 
@@ -126,13 +128,13 @@ export default function FavoritesPage() {
 
 			{/* Bottom Call to Action */}
 			<div className="text-center pt-8">
-				<a
+				<Link
 					href="/"
 					className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#ffd700]/20 to-[#ffaa33]/20 text-[#232946] dark:text-white font-semibold hover:from-[#ffd700]/30 hover:to-[#ffaa33]/30 transition-all duration-200"
 				>
 					<Library className="w-5 h-5" />
 					Discover More Libraries
-				</a>
+				</Link>
 			</div>
 		</motion.div>
 	);

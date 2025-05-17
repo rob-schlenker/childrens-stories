@@ -3,10 +3,8 @@ import { Inter, Great_Vibes } from "next/font/google";
 import ThemeToggle from "./_components/ThemeToggle";
 import { ThemeProvider } from "next-themes";
 import { ReactNode } from "react";
-import TwinklingStarBackground from "./_components/TwinklingStarBackground";
 import NavSearchBar, { HamburgerNav } from "./_components/NavSearchBar";
 import Footer from "./_components/Footer";
-import { Search } from "lucide-react";
 import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });

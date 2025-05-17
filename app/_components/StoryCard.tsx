@@ -1,14 +1,16 @@
 "use client";
-import { Story } from "@/lib/stories";
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Star } from "lucide-react";
 
-type Props = {
+import { useState, useEffect } from "react";
+import { Story } from "@/lib/stories";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
+
+interface Props {
 	story: Story;
-	onFavorite: (id: string) => void;
+	onFavoriteAction: () => Promise<void>;
 	isFavorited: boolean;
-};
+	className?: string;
+}
 
 // Array of fun gradient backgrounds
 const gradients = [
@@ -22,7 +24,12 @@ const gradients = [
 	"from-teal-400 via-cyan-300 to-blue-200",
 ];
 
-export default function StoryCard({ story, onFavorite, isFavorited }: Props) {
+export default function StoryCard({
+	story,
+	onFavoriteAction,
+	isFavorited,
+	className,
+}: Props) {
 	const [imgError, setImgError] = useState(false);
 
 	// Reset imgError if the story.image changes
@@ -34,10 +41,15 @@ export default function StoryCard({ story, onFavorite, isFavorited }: Props) {
 	const gradient = gradients[parseInt(story.id, 10) % gradients.length];
 
 	return (
-		<div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 flex flex-col justify-between">
+		<div
+			className={cn(
+				"bg-white dark:bg-gray-800 rounded-lg shadow p-4 flex flex-col justify-between",
+				className
+			)}
+		>
 			{story.image && !imgError ? (
 				<div className="w-full h-40 overflow-hidden rounded">
-					<img
+					<Image
 						src={story.image}
 						alt={story.title}
 						className="w-full h-40 object-cover rounded transition-transform duration-300 ease-in-out hover:scale-105"
@@ -78,7 +90,7 @@ export default function StoryCard({ story, onFavorite, isFavorited }: Props) {
 				</a>
 				<button
 					className={`ml-auto px-3 py-2 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition`}
-					onClick={() => onFavorite(story.id)}
+					onClick={onFavoriteAction}
 					aria-label={isFavorited ? "Unfavorite" : "Favorite"}
 				>
 					<span
