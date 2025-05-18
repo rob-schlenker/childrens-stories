@@ -7,6 +7,7 @@ import NavSearchBar, { HamburgerNav } from "./_components/NavSearchBar";
 import Footer from "./_components/Footer";
 import Image from "next/image";
 import Link from "next/link";
+import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({ subsets: ["latin"] });
 const greatVibes = Great_Vibes({ subsets: ["latin"], weight: "400" });
@@ -76,6 +77,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 					{/* Footer */}
 					<Footer />
 				</ThemeProvider>
+				<Analytics />
 			</body>
 		</html>
 	);
