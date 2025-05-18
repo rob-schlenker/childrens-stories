@@ -98,26 +98,6 @@ export default function HomePage() {
 				</section>
 			)}
 
-			{/* Interactive Stories */}
-			<section className="px-4">
-				<div className="max-w-6xl mx-auto">
-					<div className="flex items-center gap-3 mb-6">
-						<Sparkles className="w-8 h-8 text-[#ffd700]" />
-						<h2 className="text-2xl font-bold">Interactive Adventures</h2>
-					</div>
-					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-						{categories.interactive.map((site) => (
-							<SiteCard
-								key={site.id}
-								site={site}
-								isFavorited={favorites.includes(site.id)}
-								onFavorite={handleFavorite}
-							/>
-						))}
-					</div>
-				</div>
-			</section>
-
 			{/* Audio Stories */}
 			<section className="px-4 bg-gradient-to-b from-transparent via-gray-50/50 dark:via-gray-900/50 to-transparent py-16">
 				<div className="max-w-6xl mx-auto">
