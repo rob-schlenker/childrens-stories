@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import HeroBanner from "./_components/HeroBanner";
 import { storySites } from "./_components/StorySitesSection";
 import SiteCard from "./_components/SiteCard";
-import { BookOpen, Sparkles, Globe, Headphones } from "lucide-react";
+import { BookOpen, Globe, Headphones } from "lucide-react";
 import Image from "next/image";
 
 export default function HomePage() {
