@@ -217,13 +217,6 @@ export const storySites = [
 		description: "Short stories and videos for children.",
 		logo: "/logos/literacyshed.png",
 	},
-	{
-		id: "the-story-home",
-		name: "The Story Home",
-		url: "https://thestoryhome.com/",
-		description: "Audio stories for children and families.",
-		logo: "/logos/storyhome.png",
-	}
 ];
 
 export default function StorySitesSection() {
